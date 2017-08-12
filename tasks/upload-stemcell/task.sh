@@ -24,15 +24,16 @@ function main() {
     echo "stemcell not found."
     exit 1
   fi
-  
+
   printf "Uploading %s to %s ...\n" "${stemcell}" "${OPSMAN_HOST}"
-#    om-linux --target "https://${OPSMAN_HOST}" \
-#        --skip-ssl-validation \
-#        --username "${OPSMAN_USERNAME}" \
-#        --password "${OPSMAN_PASSWORD}" \
-#        upload-stemcell \
-#        --stemcell "${stemcell}"
-  done
+
+  # om-linux --target "https://${OPSMAN_HOST}" \
+  #    --skip-ssl-validation \
+  #    --username "${OPSMAN_USERNAME}" \
+  #    --password "${OPSMAN_PASSWORD}" \
+  #    upload-stemcell \
+  #    --stemcell "${stemcell}"
+
 }
 
 main
