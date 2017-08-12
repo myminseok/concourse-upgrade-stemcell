@@ -27,12 +27,7 @@ function main() {
 
   printf "Uploading %s to %s ...\n" "${stemcell}" "${OPSMAN_HOST}"
 
-  # om-linux --target "https://${OPSMAN_HOST}" \
-  #    --skip-ssl-validation \
-  #    --username "${OPSMAN_USERNAME}" \
-  #    --password "${OPSMAN_PASSWORD}" \
-  #    upload-stemcell \
-  #    --stemcell "${stemcell}"
+  om-linux -t https://${OPSMAN_HOST} -u ${OPSMAN_USERNAME} -p ${OPSMAN_PASSWORD} -k upload-stemcell -s ${stemcell}
 
 }
 
