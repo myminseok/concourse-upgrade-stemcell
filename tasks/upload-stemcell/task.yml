@@ -29,4 +29,4 @@ params:
   OPSMAN_HOST:
 
 run:
-  path: concourse-upgrade-stemcell/tasks/upload-stemcell/task.sh
+  path: upgrade-stemcell/tasks/upload-stemcell/task.sh

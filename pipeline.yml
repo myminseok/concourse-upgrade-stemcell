@@ -29,7 +29,7 @@ jobs:
       - {{iaas_type}}
   - get: upgrade-stemcell
   - task: upload-stemcell
-    file: concourse-upgrade-stemcell/tasks/upload-stemcell/task.yml
+    file: upgrade-stemcell/tasks/upload-stemcell/task.yml
     params:
       OPSMAN_USERNAME: {{opsman_admin_username}}
       OPSMAN_PASSWORD: {{opsman_admin_password}}
