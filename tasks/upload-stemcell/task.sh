@@ -17,16 +17,15 @@ set -eu
 # limitations under the License.
 
 function main() {
-  local cwd
-  cwd=$(pwd)
+  local cwd=$(pwd)
+  local stemcell=$(find ${cwd}/stemcell/*.tgz)
 
-  if [ -n "$(find ${cwd}/stemcells/ -prune -empty)" ]; then
-    echo "No stemcells found."
+  if [ -n ${stemcell} ]; then
+    echo "stemcell not found."
     exit 1
   fi
-
-  for stemcell in ${cwd}/stemcells/*.tgz; do
-    printf "Uploading %s to %s ...\n" "${stemcell}" "${OPSMAN_HOST}"
+  
+  printf "Uploading %s to %s ...\n" "${stemcell}" "${OPSMAN_HOST}"
 #    om-linux --target "https://${OPSMAN_HOST}" \
 #        --skip-ssl-validation \
 #        --username "${OPSMAN_USERNAME}" \
