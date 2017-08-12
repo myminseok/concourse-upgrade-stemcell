@@ -20,7 +20,7 @@ function main() {
   local cwd=$(pwd)
   local stemcell=$(find ${cwd}/stemcell/*.tgz)
 
-  if [ -n ${stemcell} ]; then
+  if [ -z ${stemcell} ]; then
     echo "stemcell not found."
     exit 1
   fi
