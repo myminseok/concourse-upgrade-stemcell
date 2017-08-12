@@ -16,7 +16,7 @@ resources:
 - name: upgrade-stemcell
   type: git
   source:
-    uri: git@github.com:sturadnidge/upgrade-stemcell.git
+    uri: git@github.com:sturadnidge/concourse-upgrade-stemcell.git
     branch: master
     private_key: {{git_private_key}}
 
@@ -29,7 +29,7 @@ jobs:
       - {{iaas_type}}
   - get: upgrade-stemcell
   - task: upload-stemcell
-    file: upgrade-stemcell/tasks/upload-stemcell/task.yml
+    file: concourse-upgrade-stemcell/tasks/upload-stemcell/task.yml
     params:
       OPSMAN_USERNAME: {{opsman_admin_username}}
       OPSMAN_PASSWORD: {{opsman_admin_password}}

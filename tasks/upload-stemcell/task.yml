@@ -20,8 +20,8 @@ image_resource:
   source: {repository: czero/cflinuxfs2}
 
 inputs:
-  - name: pcf-pipelines
   - name: stemcell
+  - name: upgrade-stemcell
 
 params:
   OPSMAN_USERNAME:
@@ -29,4 +29,4 @@ params:
   OPSMAN_HOST:
 
 run:
-  path: pcf-pipelines/upgrade-stemcell/tasks/upload-stemcell/task.sh
+  path: concourse-upgrade-stemcell/tasks/upload-stemcell/task.sh
