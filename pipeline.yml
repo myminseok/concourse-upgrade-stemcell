@@ -1,0 +1,36 @@
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+   repository: pivotalcf/pivnet-resource
+   tag: latest-final
+
+resources:
+- name: stemcell
+  type: pivnet
+  source:
+    api_token: {{pivnet_token}}
+    product_slug: stemcells
+    product_version: {{stemcell_version_regex}}
+    sort_by: semver
+- name: upgrade-stemcell
+  type: git
+  source:
+    uri: git@github.com:sturadnidge/upgrade-stemcell.git
+    branch: master
+    private_key: {{git_private_key}}
+
+jobs:
+- name: get-and-upload-stemcell
+  plan:
+  - get: stemcell
+    params:
+      globs:
+      - {{iaas_type}}
+  - get: upgrade-stemcell
+  - task: upload-stemcell
+    file: upgrade-stemcell/tasks/upload-stemcell/task.yml
+    params:
+      OPSMAN_USERNAME: {{opsman_admin_username}}
+      OPSMAN_PASSWORD: {{opsman_admin_password}}
+      OPSMAN_HOST: {{opsman_host}}
