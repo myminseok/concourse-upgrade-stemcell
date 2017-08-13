@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Major stemcell version to update
-stemcell_version_regex: ^3363\..*$
+stemcell_version_regex: ^3363(\.\d*)?$
 
 # Target IaaS, glob style
 iaas_type: "*aws*"

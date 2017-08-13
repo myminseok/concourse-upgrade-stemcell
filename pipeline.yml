@@ -6,6 +6,12 @@ resource_types:
    tag: latest-final
 
 resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: git@github.com:pivotal-cf/pcf-pipelines.git
+    branch: master
+    private_key: {{git_private_key}}
 - name: stemcell
   type: pivnet
   source:
@@ -34,3 +40,26 @@ jobs:
       OPSMAN_USERNAME: {{opsman_admin_username}}
       OPSMAN_PASSWORD: {{opsman_admin_password}}
       OPSMAN_HOST: {{opsman_host}}
+
+- name: apply-changes
+  plan:
+  - get: stemcell
+    params:
+      globs:
+      - {{iaas_type}}
+    passed:
+    - get-and-upload-stemcell
+    trigger: true
+  - get: pcf-pipelines
+  - task: wait-opsman-clear
+    file: pcf-pipelines/tasks/wait-opsman-clear/task.yml
+    params:
+      OPSMAN_USERNAME: {{opsman_admin_username}}
+      OPSMAN_PASSWORD: {{opsman_admin_password}}
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_host}}
+  - task: apply-changes
+    file: pcf-pipelines/tasks/apply-changes/task.yml
+    params:
+      OPSMAN_USERNAME: {{opsman_admin_username}}
+      OPSMAN_PASSWORD: {{opsman_admin_password}}
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_host}}
