@@ -33,7 +33,6 @@ jobs:
     params:
       globs:
       - {{iaas_type}}
-    trigger: true
   - get: upgrade-stemcell
   - task: upload-stemcell
     file: upgrade-stemcell/tasks/upload-stemcell/task.yml
@@ -50,7 +49,7 @@ jobs:
       - {{iaas_type}}
     passed:
     - get-and-upload-stemcell
-    trigger: false 
+    trigger: true
   - get: pcf-pipelines
   - task: wait-opsman-clear
     file: pcf-pipelines/tasks/wait-opsman-clear/task.yml
